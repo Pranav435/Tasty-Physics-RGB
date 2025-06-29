@@ -345,15 +345,19 @@ void modeGayMotherfucker() {
 }
 
 void modeSoundReactive() {
-  static uint8_t smoothedBri = 0;
-  uint8_t rawBri = constrain(map(analogRead(MIC_PIN),0,1023,10,255),10,255);
-  smoothedBri = (smoothedBri*7 + rawBri)/8;
-  // trail
-  for(int i=0;i<NUM_LEDS;i++) leds[i].nscale8(200);
-  // moving, color-cycle dot
-  uint8_t baseHue = phase * 5;
-  int pos = phase % NUM_LEDS;
-  leds[pos] = CHSV(baseHue,255,smoothedBri);
+  static uint8_t smoothedBri[NUM_LEDS];
+
+  uint8_t micVal = constrain(map(analogRead(MIC_PIN), 0, 1023, 0, 255), 0, 255);
+  uint8_t baseHue = phase * 2;
+
+  for (int i = 0; i < NUM_LEDS; i++) {
+    // give each LED a bit of offset so it's not too uniform
+    uint8_t localMic = micVal - random(20);
+    // smooth brightness per-LED
+    smoothedBri[i] = (smoothedBri[i] * 7 + localMic) / 8;
+
+    leds[i] = CHSV(baseHue + i * 4, 255, smoothedBri[i]);
+  }
 }
 
 void modeSolidColor() {
