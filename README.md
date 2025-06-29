@@ -1,7 +1,6 @@
 # 🌈 Tasty Physics RGB
 
 Because why settle for basic LED strips when you can have standing waves, chaotic attractors, a mode literally called **Gay Motherfucker**, and a relay that lets your light strip *gaslight* your entire room?
-
 Tasty Physics RGB is a glorified mess of math, microcontrollers, and LEDs. It’s powered by physics equations we barely understand, made readable via a tiny OLED, and built on a Mega because Uno and Nano have the processing power of a potato chip.
 
 ---
